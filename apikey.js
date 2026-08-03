@@ -142,14 +142,12 @@ function createPhotoCard(photo) {
     <img src="${photo.src.medium}" alt="${photo.alt || 'Фото'}" class="w-full h-auto rounded-lg z-10 block" style="aspect-ratio: ${photo.width} / ${photo.height};">
     <div class="absolute inset-0 flex flex-col justify-between items-stretch p-2 z-30 pointer-events-none">
 
-      <!-- Верхний блок: кнопка с выпадающим меню. Сам блок появляется при наведении на карточку,
-           а меню внутри него — при наведении на сам блок (именованная группа group/dropdown) -->
-      <div class="dropdown-wrapper group/dropdown relative self-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-auto">
-        <button type="button" class="dropdown-toggle-btn inline-flex items-center justify-center text-white bg-[#232a34]/90 hover:bg-[#232a34] backdrop-blur-sm box-border border border-white/10 shadow-md font-medium leading-5 rounded-full text-sm px-4 py-2 focus:outline-none">
+      <div class="dropdown-wrapper group/dropdown relative self-end group-hover:backdrop-blur-lg rounded-full opacity-0 group-hover:opacity-100  duration-300 ease-out pointer-events-auto truncate translate-x-4 group-hover:translate-x-0 transition-transform delay-150">
+        <button type="button" class="dropdown-toggle-btn inline-flex items-center justify-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
           Dropdown button
           <svg class="dropdown-arrow transition-transform duration-300 ease-in-out w-4 h-4 ms-1.5 -me-0.5 group-hover/dropdown:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
         </button>
-        <div class="dropdown-menu absolute right-0 mt-2 z-40 bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44 opacity-0 invisible -translate-y-1 group-hover/dropdown:opacity-100 group-hover/dropdown:visible group-hover/dropdown:translate-y-0 transition-all duration-200 ease-out">
+        <div class="dropdown-menu absolute right-0 mt-2 z-40  backdrop-blur-lg rounded-base shadow-lg w-44 opacity-0 invisible -translate-y-1 group-hover/dropdown:opacity-100 group-hover/dropdown:visible group-hover/dropdown:translate-y-0 transition-all duration-200 ease-in-out">
           <ul class="p-2 text-sm text-body font-medium">
             <li>
               <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Dashboard</a>
@@ -167,16 +165,13 @@ function createPhotoCard(photo) {
         </div>
       </div>
 
-      <!-- Нижняя панель: автор + кнопка скачивания, тёмный градиент как на pexels.com -->
-      <div class="info-panel bg-gradient-to-t from-black/70 via-black/20 to-transparent text-white text-sm sm:text-base p-3 -m-2 mt-0 rounded-b-lg flex justify-between items-end opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300 delay-150 ease-out">
-        <span class="truncate -translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-130 ease-in-out font-medium">
+      <!-- Нижняя панель: автор + кнопка скачивания -->
+      <div class="info-panel backdrop-blur-sm text-white text-lg p-2 rounded-b-lg flex justify-between items-center opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300 delay-150 ease-out left-0 right-0 bottom-0 top-2">
+        <span class="truncate -translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-130 ease-in-out">
           ${photo.photographer}
         </span>
-        <div class="flex justify-center items-center shrink-0 translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-150 ease-in-out">
-          <button type="button" class="download-btn flex items-center gap-1.5 rounded-full px-4 py-2 text-white text-sm font-semibold cursor-pointer transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Скачать
-          </button>
+        <div class="backdrop-blur-[4px] flex justify-center items-center rounded-full h-auto shrink-0 truncate translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-150 ease-in-out group-hover:backdrop-blur-lg">
+          <button type="button" class="download-btn border flex text-center items-center justify-center rounded-full w-[90px] h-8 cursor-pointer text-white">Скачать</button>
         </div>
       </div>
 
