@@ -141,11 +141,11 @@ function createPhotoCard(photo) {
   photoCard.innerHTML = `
     <img src="${photo.src.medium}" alt="${photo.alt || 'Фото'}" class="w-full h-auto rounded-lg z-10 block" style="aspect-ratio: ${photo.width} / ${photo.height};">
     <div class="absolute bottom-0 left-0 right-0  text-white text-lg p-2 rounded-b-lg z-20 flex justify-between items-center opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300 delay-150 ease-out">
-      <span class="truncate -translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-150 ease-out">
+      <span class="truncate -translate-x-4 group-hover:translate-x-0 transition-transform duration-150 delay-130 ease-out">
         ${photo.photographer}
       </span>
-      <div class="backdrop-blur-[6px] flex justify-center items-center rounded-lg shrink-0 translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-150 ease-out group-hover:backdrop-blur-lg">
-        <button type="button" class="download-btn border rounded-lg w-[130px] h-[32px] cursor-pointer text-white p-1">Скачать</button>
+      <div class="backdrop-blur-[6px] flex justify-center items-center rounded-lg shrink-0 translate-x-4 group-hover:translate-x-0 transition-transform duration-150 delay-130 ease-out group-hover:backdrop-blur-lg">
+        <button type="button" class="download-btn border flex text-center justify-center rounded-lg w-[130px] h-[32px] cursor-pointer text-white p-1">Скачать</button>
       </div>
     </div>
   `;
