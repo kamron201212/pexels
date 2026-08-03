@@ -135,38 +135,39 @@ async function downloadPhoto(url, filename) {
 }
 
 function createPhotoCard(photo) {
+
+
   const photoCard = document.createElement('div');
   photoCard.className = 'photo-card group relative cursor-pointer overflow-hidden rounded-lg';
 
   photoCard.innerHTML = `
-    <img src="${photo.src.medium}" alt="${photo.alt || 'Фото'}" class="w-full h-auto rounded-lg z-10 block" style="aspect-ratio: ${photo.width} / ${photo.height};">
-    <div class="absolute inset-0 flex flex-col justify-between items-stretch p-2 z-30 pointer-events-none">
-
-      <div class="dropdown-wrapper group/dropdown relative self-end group-hover:backdrop-blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-auto truc translate-x-4 group-hover:translate-x-0 transition-transform delay-150">
-        <button type="button" class="dropdown-toggle-btn inline-flex items-center justify-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+    <img src="${photo.src.medium}" alt="${photo.alt || 'Фото'}" class="pb-0 w-full h-auto rounded-lg z-10 block" style="aspect-ratio: ${photo.width} / ${photo.height};">
+    <div class="absolute inset-0 flex flex-col justify-between items-stretch z-30 pointer-events-none">
+      <div class="dropdown-wrapper group/dropdown relative self-end backdrop-blur-xl  rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out pointer-events-auto translate-x-4 group-hover:translate-x-0 transition-transform delay-130">
+        <button type="button" class="dropdown-toggle-btn  inline-flex items-center justify-center text-white bg-brand box-border  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
           Dropdown button
           <svg class="dropdown-arrow transition-transform duration-300 ease-in-out w-4 h-4 ms-1.5 -me-0.5 group-hover/dropdown:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
         </button>
-        <div class="dropdown-menu absolute right-0 mt-2 z-40  backdrop-blur-lg rounded-base shadow-lg w-44 opacity-0 invisible -translate-y-1 group-hover/dropdown:opacity-100 group-hover/dropdown:visible group-hover/dropdown:translate-y-0 transition-all duration-200 ease-in-out">
+        <div class="dropdown-menu absolute right-0 z-80 rounded-base backdrop-blur-xl shadow-lg w-[170px] opacity-0 translate-y-2 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:translate-y-0 group-hover/dropdown:visible transition-all duration-300 ease-in-out">
           <ul class="p-2 text-sm text-body font-medium">
             <li>
-              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Dashboard</a>
+              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-black/30 hover:text-heading rounded">Dashboard</a>
             </li>
             <li>
-              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Settings</a>
+              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-black/30  hover:text-heading rounded">Settings</a>
             </li>
             <li>
-              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Earnings</a>
+              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-black/30 hover:text-heading rounded">Earnings</a>
             </li>
             <li>
-              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sign out</a>
+              <a href="#" class="inline-flex items-center w-full p-2 hover:bg-black/30 hover:text-heading rounded">Sign out</a>
             </li>
           </ul>
         </div>
       </div>
 
       <!-- Нижняя панель: автор + кнопка скачивания -->
-      <div class="info-panel backdrop-blur-sm text-white text-lg p-2 rounded-b-lg flex justify-between items-center opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300 delay-150 ease-out left-0 right-0 bottom-0 top-2">
+      <div class="info-panel backdrop-blur-sm text-white text-lg px-2 h-[50px] rounded-b-lg flex justify-between items-center opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300 delay-150 ease-out  pb-0">
         <span class="truncate -translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-130 ease-in-out">
           ${photo.photographer}
         </span>
@@ -198,7 +199,35 @@ function createPhotoCard(photo) {
   dropdownWrapper.addEventListener('click', (e) => {
     e.stopPropagation();
   });
-
+  const dropdownBtn = photoCard.querySelector('.dropdown-toggle-btn');
+  const dropdownArrow = photoCard.querySelector('.dropdown-arrow');
+  const dropdownMenu = photoCard.querySelector('.dropdown-menu');
+dropdownBtn.addEventListener('mouseover', (e) => {  
+  e.stopPropagation();
+  const dropdownMenu = photoCard.querySelector('.dropdown-menu');
+  dropdownMenu.classList.add('opacity-100', 'visible', 'translate-y-0',);
+  dropdownArrow.classList.add('rotate-180'); 
+  dropdownMenu.classList.remove('absolute');
+});
+dropdownBtn.addEventListener('mouseout', (e) => {  
+  e.stopPropagation();
+  const dropdownMenu = photoCard.querySelector('.dropdown-menu');
+  dropdownMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
+  dropdownArrow.classList.remove('rotate-180');
+  dropdownMenu.classList.add('absolute');  
+});
+dropdownMenu.addEventListener('mouseover', (e) => {  
+  e.stopPropagation();
+  dropdownMenu.classList.add('opacity-100', 'visible', 'translate-y-0');
+  dropdownArrow.classList.add('rotate-180'); 
+  dropdownMenu.classList.remove('absolute');
+});
+dropdownMenu.addEventListener('mouseout', (e) => {  
+  e.stopPropagation();
+  dropdownMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
+  dropdownArrow.classList.remove('rotate-180');
+  dropdownMenu.classList.add('absolute');  
+});
   return photoCard;
 }
 
