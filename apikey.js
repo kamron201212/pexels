@@ -188,14 +188,10 @@ function createPhotoCard(photo) {
 
   return photoCard;
 }
-const dropdownDefaultButton = photoCard.querySelector('.download-btn');
-  dropdownDefaultButton.addEventListener('click', (e) => {
-    e.stopPropagation();
-    downloadPhoto(photo.src.original, `pexels-${photo.id}.jpg`);
-  });
+
 function renderPhotos(photos) {
   photos.forEach(photo => {
-    allLoadedPhotos.push(photo); 
+    allLoadedPhotos.push(photo);
     const photoCard = createPhotoCard(photo);
     getShortestColumn().appendChild(photoCard);
   });
