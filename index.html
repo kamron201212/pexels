@@ -9,22 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body class="bg-[#0e0e0e] text-[#f2f0eb] min-h-screen">
-
   <header class="w-full mx-auto px-6 pt-14 pb-8 text-center">
     <h1 class="font-display text-4xl font-semibold mb-2">Поиск фото</h1>
     <p class="text-[#9a968c] text-sm mb-7">Фото предоставлены Pexels — введите тему и нажмите «Искать»</p>
 
     <div class="flex gap-2 max-w-md mx-auto">
-      <input
-        id="searchInput"
-        type="text"
-        placeholder="Например: горы, кофе, кот..."
-        class="flex-1 bg-[#1c1c1c] border border-white/10 rounded-lg px-4 py-2.5 text-sm outline-none focus:border-[#e8a06b] transition-colors"
-      >
-      <button
-        id="searchBtn"
-        class="bg-[#e8a06b] hover:brightness-110 rounded-lg px-5 text-sm font-semibold text-[#1a1a1a] transition"
-      >
+      <input id="searchInput"type="text"placeholder="Например: горы, кофе, кот..." class="flex-1 bg-[#1c1c1c] border border-white/10 rounded-lg px-4 py-2.5 text-sm outline-none focus:border-[#e8a06b] transition-colors">
+      <button id="searchBtn" class="bg-[#e8a06b] hover:brightness-110 rounded-lg px-5 text-sm font-semibold text-[#1a1a1a] transition">
         Искать
       </button>
     </div>
@@ -35,10 +26,7 @@
     <div id="resultsGrid" class="flex gap-3 items-start"></div>
 
     <div class="text-center mt-8">
-      <button
-        id="loadMoreBtn"
-        class="bg-[#1c1c1c] border border-white/10 hover:border-[#e8a06b] rounded-lg px-6 py-2.5 text-sm font-medium transition-colors"
-      >
+      <button id="loadMoreBtn" class="bg-[#1c1c1c] border border-white/10 hover:border-[#e8a06b] rounded-lg px-6 py-2.5 text-sm font-medium transition-colors">
         Показать ещё
       </button>
     </div>
@@ -52,6 +40,6 @@
     </div>
   </div>
 
-  <script src="/apikey.js"></script>
+<script src="/apikey.js"></script>
 </body>
 </html>
