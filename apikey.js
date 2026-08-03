@@ -142,7 +142,7 @@ function createPhotoCard(photo) {
     <img src="${photo.src.medium}" alt="${photo.alt || 'Фото'}" class="w-full h-auto rounded-lg z-10 block" style="aspect-ratio: ${photo.width} / ${photo.height};">
     <div class="absolute inset-0 flex flex-col justify-between items-stretch p-2 z-30 pointer-events-none">
 
-      <div class="dropdown-wrapper group/dropdown relative self-end group-hover:backdrop-blur-lg rounded-full opacity-0 group-hover:opacity-100  duration-300 ease-out pointer-events-auto truncate translate-x-4 group-hover:translate-x-0 transition-transform delay-150">
+      <div class="dropdown-wrapper group/dropdown relative self-end group-hover:backdrop-blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-auto truc translate-x-4 group-hover:translate-x-0 transition-transform delay-150">
         <button type="button" class="dropdown-toggle-btn inline-flex items-center justify-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
           Dropdown button
           <svg class="dropdown-arrow transition-transform duration-300 ease-in-out w-4 h-4 ms-1.5 -me-0.5 group-hover/dropdown:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
