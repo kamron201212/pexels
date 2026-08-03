@@ -144,8 +144,8 @@ function createPhotoCard(photo) {
       <span class="truncate -translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-130 ease-in-out">
         ${photo.photographer}
       </span>
-      <div class="backdrop-blur-[6px] flex justify-center items-center rounded-lg shrink-0 translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-150 ease-in-out group-hover:backdrop-blur-lg">
-        <button type="button" class="download-btn border flex text-center justify-center rounded-lg w-[130px] h-[32px] cursor-pointer text-white">Скачать</button>
+      <div class="backdrop-blur-4px] flex justify-center items-center rounded-lg shrink-0 translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-150 ease-in-out group-hover:backdrop-blur-lg">
+        <button type="button" class="download-btn border flex text-center justify-center rounded-lg w-[110px] h-[52px] cursor-pointer text-white">Скачать</button>
       </div>
     </div>
   `;
