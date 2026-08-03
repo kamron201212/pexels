@@ -147,7 +147,7 @@ function createPhotoCard(photo) {
           Dropdown button
           <svg class="dropdown-arrow transition-transform duration-300 ease-in-out w-4 h-4 ms-1.5 -me-0.5 group-hover/dropdown:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
         </button>
-        <div class="dropdown-menu absolute right-0 mt-2 z-40 bg-neutral-primary-medium backdrop-blur-lg rounded-base shadow-lg w-44 opacity-0 invisible -translate-y-1 group-hover/dropdown:opacity-100 group-hover/dropdown:visible group-hover/dropdown:translate-y-0 transition-all duration-200 ease-out">
+        <div class="dropdown-menu absolute right-0 mt-2 z-40  backdrop-blur-lg rounded-base shadow-lg w-44 opacity-0 invisible -translate-y-1 group-hover/dropdown:opacity-100 group-hover/dropdown:visible group-hover/dropdown:translate-y-0 transition-all duration-200 ease-in-out">
           <ul class="p-2 text-sm text-body font-medium">
             <li>
               <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Dashboard</a>
