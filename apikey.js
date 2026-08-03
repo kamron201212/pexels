@@ -5,6 +5,23 @@ const searchBtn = document.getElementById('searchBtn');
 const statusMsg = document.getElementById('statusMsg');
 const resultsGrid = document.getElementById('resultsGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
+const dropdownHoverbtn = document.getElementById('dropdownHoverButton');
+const dropdownhoverMenu = document.getElementById('dropdownHover');
+const dropdownhoverArrow = document.getElementById('dropdownhoverArrow'); 
+const dropdownB = document.getElementById('dropdownB');
+const dropdownM = document.getElementById('dropdownM');
+const dropdownA = document.getElementById('dropdownA');
+const colocolB = document.getElementById('colocolB');
+const colocolM = document.getElementById('colocolM');
+const colocolA = document.getElementById('colocolA');
+const logoB = document.getElementById('logoB');
+const logoM = document.getElementById('logoM');
+const changeB = document.getElementById('changeB');
+const changeM = document.getElementById('changeM');
+const changeA = document.getElementById('changeA');
+const headersearch = document.getElementById('headerSearch');
+const headerSearchInput = document.getElementById('headerSearchInput');
+const headerSearchBtn = document.getElementById('headerSearchBtn');
 
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
@@ -138,10 +155,10 @@ function createPhotoCard(photo) {
 
 
   const photoCard = document.createElement('div');
-  photoCard.className = 'photo-card group relative cursor-pointer overflow-hidden rounded-lg';
+  photoCard.className = 'photo-card group relative cursor-pointer overflow-hidden rounded-lg bg-linear-to-t from-black/90 to-black/80';
 
   photoCard.innerHTML = `
-    <img src="${photo.src.medium}" alt="${photo.alt || 'Фото'}" class="pb-0 w-full h-auto rounded-lg z-10 block" style="aspect-ratio: ${photo.width} / ${photo.height};">
+    <img src="${photo.src.medium}" alt="${photo.alt || 'Фото'}" class="pb-0 w-full  h-auto rounded-lg z-10 block" style="aspect-ratio: ${photo.width} / ${photo.height};">
     <div class="absolute inset-0 flex flex-col justify-between items-stretch z-30 pointer-events-none">
       <div class="dropdown-wrapper group/dropdown relative self-end backdrop-blur-xl  rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out pointer-events-auto translate-x-4 group-hover:translate-x-0 transition-transform delay-130">
         <button type="button" class="dropdown-toggle-btn  inline-flex items-center justify-center text-white bg-brand box-border  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
@@ -149,7 +166,7 @@ function createPhotoCard(photo) {
           <svg class="dropdown-arrow transition-transform duration-300 ease-in-out w-4 h-4 ms-1.5 -me-0.5 group-hover/dropdown:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
         </button>
         <div class="dropdown-menu absolute right-0 z-80 rounded-base backdrop-blur-xl shadow-lg w-[170px] opacity-0 translate-y-2 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:translate-y-0 group-hover/dropdown:visible transition-all duration-300 ease-in-out">
-          <ul class="p-2 text-sm text-body font-medium">
+          <ul class="p-2 text-sm text-body text-white font-medium">
             <li>
               <a href="#" class="inline-flex items-center w-full p-2 hover:bg-black/30 hover:text-heading rounded">Dashboard</a>
             </li>
@@ -167,11 +184,11 @@ function createPhotoCard(photo) {
       </div>
 
       <!-- Нижняя панель: автор + кнопка скачивания -->
-      <div class="info-panel backdrop-blur-sm text-white text-lg px-2 h-[50px] rounded-b-lg flex justify-between items-center opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300 delay-150 ease-out  pb-0">
+      <div class="info-panel text-white text-lg px-2 h-[50px] rounded-b-lg flex justify-between items-center opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300 delay-150 ease-out  pb-0">
         <span class="truncate -translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-130 ease-in-out">
           ${photo.photographer}
         </span>
-        <div class="backdrop-blur-[4px] flex justify-center items-center rounded-full h-auto shrink-0 truncate translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-150 ease-in-out group-hover:backdrop-blur-lg">
+        <div class="flex justify-center items-center rounded-full h-auto shrink-0 truncate translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-150 ease-in-out hover:backdrop-blur-lg">
           <button type="button" class="download-btn border flex text-center items-center justify-center rounded-full w-[90px] h-8 cursor-pointer text-white">Скачать</button>
         </div>
       </div>
@@ -230,6 +247,109 @@ dropdownMenu.addEventListener('mouseout', (e) => {
 });
   return photoCard;
 }
+// Убрать блок с dropdownHoverbtn / dropdownhoverMenu из createPhotoCard()
+// и вынести его на верхний уровень файла, например после объявления lightbox-обработчиков:
+
+dropdownHoverbtn.addEventListener('mouseover', () => {
+  dropdownhoverMenu.classList.remove('hidden');
+  dropdownhoverMenu.classList.add('opacity-100', 'visible', 'translate-y-0');
+  dropdownhoverArrow.classList.add('rotate-180');
+});
+
+dropdownHoverbtn.addEventListener('mouseout', () => {
+  dropdownhoverMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
+  dropdownhoverArrow.classList.remove('rotate-180');
+  dropdownhoverMenu.classList.add('hidden');
+});
+
+dropdownhoverMenu.addEventListener('mouseover', () => {
+  dropdownhoverMenu.classList.remove('hidden');
+  dropdownhoverMenu.classList.add('opacity-100', 'visible', 'translate-y-0');
+});
+
+dropdownhoverMenu.addEventListener('mouseout', () => {
+  dropdownhoverMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
+  dropdownhoverMenu.classList.add('hidden');
+});
+dropdownB.addEventListener('mouseover', () => {
+  dropdownM.classList.remove('hidden');
+  dropdownM.classList.add('opacity-100', 'visible', 'translate-y-0');
+});
+
+dropdownB.addEventListener('mouseout', () => {
+  dropdownM.classList.remove('opacity-100', 'visible', 'translate-y-0');
+  dropdownM.classList.add('hidden');
+});
+
+dropdownM.addEventListener('mouseover', () => {
+  dropdownM.classList.remove('hidden');
+  dropdownM.classList.add('opacity-100', 'visible', 'translate-y-0');
+});
+
+dropdownM.addEventListener('mouseout', () => {
+  dropdownM.classList.remove('opacity-100', 'visible', 'translate-y-0');
+  dropdownM.classList.add('hidden');
+});
+colocolB.addEventListener('mouseover', () => {
+  colocolM.classList.remove('hidden');
+  colocolM.classList.add('opacity-100', 'visible', 'translate-y-0');
+});
+
+colocolB.addEventListener('mouseout', () => {
+  colocolM.classList.remove('opacity-100', 'visible', 'translate-y-0');
+  colocolM.classList.add('hidden');
+});
+
+colocolM.addEventListener('mouseover', () => {
+  colocolM.classList.remove('hidden');
+  colocolM.classList.add('opacity-100', 'visible', 'translate-y-0');
+});
+
+colocolM.addEventListener('mouseout', () => {
+  colocolM.classList.remove('opacity-100', 'visible', 'translate-y-0');
+  colocolM.classList.add('hidden');
+});
+logoB.addEventListener('mouseover', () => {
+  logoM.classList.remove('hidden');
+  logoM.classList.add('opacity-100', 'visible', 'translate-y-0');
+});
+
+logoB.addEventListener('mouseout', () => {
+  logoM.classList.remove('opacity-100', 'visible', 'translate-y-0');
+  logoM.classList.add('hidden');
+});
+
+logoM.addEventListener('mouseover', () => {
+  logoM.classList.remove('hidden');
+  logoM.classList.add('opacity-100', 'visible', 'translate-y-0');
+});
+
+logoM.addEventListener('mouseout', () => {
+  logoM.classList.remove('opacity-100', 'visible', 'translate-y-0');
+  logoM.classList.add('hidden');
+});
+
+changeB.addEventListener('mouseover', () => {
+  changeM.classList.remove('hidden');
+  changeM.classList.add('opacity-100', 'visible', 'translate-y-0');
+  changeA.classList.add('rotate-180');
+});
+
+changeB.addEventListener('mouseout', () => {
+  changeM.classList.remove('opacity-100', 'visible', 'translate-y-0');
+  changeA.classList.remove('rotate-180');
+  changeM.classList.add('hidden');
+});
+
+changeM.addEventListener('mouseover', () => {
+  changeM.classList.remove('hidden');
+  changeM.classList.add('opacity-100', 'visible', 'translate-y-0');
+});
+
+changeM.addEventListener('mouseout', () => {
+  changeM.classList.remove('opacity-100', 'visible', 'translate-y-0');
+  changeM0.classList.add('hidden');
+});
 
 function renderPhotos(photos) {
   photos.forEach(photo => {
@@ -261,16 +381,47 @@ searchInput.addEventListener('keydown', (e) => {
   }
 });
 
+headerSearchBtn.addEventListener('click', () => {
+  searchInput.value = headerSearchInput.value;
+  currentQuery = headerSearchInput.value.trim() || null;
+  loadphotos(true);
+});
+
+headerSearchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    headerSearchBtn.click();
+  }
+});
+
+searchInput.addEventListener('input', () => {
+  headerSearchInput.value = searchInput.value;
+});
+
 loadMoreBtn.addEventListener('click', () => {
   loadphotos(false);
 });
 
+function toggleHeaderSearch() {
+  const mainSearch = document.getElementById('mainSearch');
+  const headerHeight = document.querySelector('header').offsetHeight;
+  const showHeaderSearch = mainSearch.getBoundingClientRect().bottom <= headerHeight;
+
+  headersearch.classList.toggle('opacity-0', !showHeaderSearch);
+  headersearch.classList.toggle('-translate-y-2', !showHeaderSearch);
+  headersearch.classList.toggle('pointer-events-none', !showHeaderSearch);
+}
+
 window.addEventListener('scroll', () => {
+  toggleHeaderSearch();
   const scrolledToBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 300;
   if (scrolledToBottom) {
     loadphotos(false);
   }
 });
+
+window.addEventListener('resize', toggleHeaderSearch);
+toggleHeaderSearch();
+
 
 let resizeTimer;
 window.addEventListener('resize', () => {

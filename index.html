@@ -8,20 +8,199 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body class="bg-[#0e0e0e] text-[#f2f0eb] min-h-screen">
-  <header class="w-full mx-auto px-6 pt-14 pb-8 text-center">
-    <h1 class="font-display text-4xl font-semibold mb-2">Поиск фото</h1>
-    <p class="text-[#9a968c] text-sm mb-7">Фото предоставлены Pexels — введите тему и нажмите «Искать»</p>
-
-    <div class="flex gap-2 max-w-md mx-auto">
-      <input id="searchInput"type="text"placeholder="Например: горы, кофе, кот..." class="flex-1 bg-[#1c1c1c] border border-white/10 rounded-lg px-4 py-2.5 text-sm outline-none focus:border-[#e8a06b] transition-colors">
-      <button id="searchBtn" class="bg-[#e8a06b] hover:brightness-110 rounded-lg px-5 text-sm font-semibold text-[#1a1a1a] transition">
-        Искать
+<body class="bg-white">
+  <header class="w-full h-[90px] z-50 fixed bg-white text-center border border-b-1 flex justify-between items-center px-[50px] p-0 m-0 top-0 left-0 right-0">
+    <div>
+      <h1 class="text-[30px] font-cursive">Pexels</h1>
+    </div>
+    <div id="headerSearch" class="opacity-0 -translate-y-2 pointer-events-none transition-all duration-300 ease-out flex w-[500px] h-[55px] bg-black/5 rounded-lg border border-white/10">
+      <input id="headerSearchInput" type="text" placeholder="Например: горы, кофе, кот..." class="flex-1 min-w-0 bg-transparent border border-white/10 rounded-l-lg px-4 py-2.5 text-sm outline-none transition-colors">
+      <button id="headerSearchBtn" type="button" aria-label="Искать" class="bg-transparent hover:brightness-110 px-5 text-sm font-semibold text-[#1a1a1a] transition rounded-r-lg">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/>
+          <path stroke-linecap="round" d="m20 20-4-4"/>
+        </svg>
       </button>
+    </div>
+<div class=" flex gap-2 items-center">
+  <div class="flex flex-col justify-center items-center">
+    <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" class="w-auto h-[45px]  hover:bg-black/10 rounded-full text-black inline-flex items-center justify-center text-black bg-brand box-border hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button">
+      Поиск фото
+      <svg id="dropdownhoverArrow" class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
+    </button>
+    <!-- Dropdown menu -->
+    <div id="dropdownHover" class="z-10 dropdownhower-menu hidden absolute border text-black/75 border-default-medium rounded-base shadow-lg bg-white rounded-lg w-[350px] h-[350px] flex justify-center items-center top-[70px] ">
+        <ul class="p-2 text-lg text-body font-medium" aria-labelledby="dropdownHoverButton">
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Искать бесплатные фотографии</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Таблица лидеров</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Челенджи</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Доска победителей</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">The Level Up</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Бесплатные видео</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Блог Pexels</a>
+          </li>
+        </ul>
+    </div>
+  </div>
+    <div class="w-[100px] h-[50px] rounded-full flex items-center justify-center color-black hover:bg-black/10 transition cursor-pointer">
+      Лицензия
+    </div>
+    <div class="flex flex-col justify-center items-center">
+    <button id="dropdownB" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" class="w-auto h-auto  hover:bg-black/10 rounded-full text-black inline-flex items-center justify-center text-black bg-brand box-border hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+        <circle cx="5" cy="12" r="2"/>
+        <circle cx="12" cy="12" r="2"/>
+        <circle cx="19" cy="12" r="2"/>
+      </svg>
+    </button>
+    <!-- Dropdown menu -->
+    <div id="dropdownM" class="z-10 dropdownhowerr-menu hidden absolute border text-black/75 border-default-medium rounded-base shadow-lg bg-white rounded-lg w-[250px] h-[260px] flex justify-center items-center  top-[70px]">
+        <ul class="p-2 text-[16px] text-body font-medium" aria-labelledby="dropdownHoverButton">
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">API изображений и видео</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Приложения и плагины</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Справочный центр</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Пожаловаться на контент</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Партнерство</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Условия использования</a>
+          </li>
+        </ul>
+    </div>
+  </div>
+  <div class="flex flex-col justify-center items-center">
+    <button id="colocolB" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" class="w-auto h-auto  hover:bg-black/10 rounded-full text-black  bg-contain inline-flex items-center justify-center text-black bg-brand box-border hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button w-[50px] h-[50px]">
+      <img src="/img/free-icon-bell-3602123.png" alt="" class="bg-contain w-[25px] h-[25px]">
+    </button>
+    <!-- Dropdown menu -->
+    <div id="colocolM" class="z-10 dropdownhowerr-menu hidden absolute border text-black/75 border-default-medium rounded-base shadow-lg bg-white rounded-lg w-[450px] h-[350px] flex flex-col gap-16 px-8 top-[70px] pt-6">
+      <div class="flex justify-start ">
+        <h1 class="text-2xl">Уведомления</h1>
+      </div>
+      <div class="text-left">
+        <p>Круто, вы с Pexels! Мы стремимся построить самое необычное фотосообщество. Сотрудничество с талантливыми фотографами со всего мира, ежедневно выкладывающими тысячи бесплатных фото — большая честь для нас. Как вы можете помочь нашему сообществу? Все просто:</p>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col justify-center items-center">
+    <button id="logoB" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" class="w-auto h-auto  hover:bg-black/10 rounded-full text-black  bg-contain inline-flex items-center justify-center text-black bg-brand box-border hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button w-[50px] h-[50px]">
+      <img src="/img/12058199.png" alt="" class="bg-contain w-[25px] h-[25px]">
+    </button>
+    <!-- Dropdown menu -->
+    <div id="logoM" class="z-10 dropdownhowerr-menu hidden absolute border text-black/75 border-default-medium rounded-base shadow-lg bg-white rounded-lg w-[190px] h-[200px] flex justify-center items-center  top-[70px]">
+        <ul class="p-2 text-[16px] text-body font-medium" aria-labelledby="dropdownHoverButton text-black/75">
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Ваш профиль</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Мои коллекции</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Настройки</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Выйти из системы</a>
+          </li>
+        </ul>
+    </div>
+  </div>
+  <button class="w-[100px] h-[45px] bg-black hover:bg-black/90 rounded-xl text-white">Загрузка</button>
     </div>
   </header>
 
-  <main class="w-full mx-auto px-6 pb-16">
+<main class="w-full h-full mx-auto px-6 pb-16">
+<div class="flex items-center mt-8 px-[100px]">
+    <div class="w-full h-[400px] mt-24 ">
+    <h1 class="font-display text-[40px] text-left font-semibold mb-2">Лучшие бесплатные стоковые фото, изображения без роялти и видео от талантливых авторов.</h1>
+
+  <div id="mainSearch" class="flex w-[750px] h-[80px] bg-black/5 rounded-lg border border-white/10">
+       <div class="flex flex-col justify-center items-center">
+    <button id="changeB" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" class="w-auto h-[45px]  hover:bg-black/10 rounded-full text-black inline-flex items-center justify-center text-black bg-brand box-border hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button">
+      Поиск фото
+      <svg id="changeA" class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
+    </button>
+    <!-- Dropdown menu -->
+    <div id="changeM" class="z-10 dropdownhower-menu hidden absolute border text-black/75 border-default-medium rounded-base shadow-lg bg-white rounded-lg w-[150px] h-[100px] flex justify-center items-center top-[370px] ">
+        <ul class="p-2 text-lg text-body font-medium" aria-labelledby="dropdownHoverButton">
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Фото</a>
+          </li>
+          <li>
+            <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Для видео</a>
+            </a>
+          </li>
+        </ul>
+    </div>
+  </div>
+      <input id="searchInput" type="text"placeholder="Например: горы, кофе, кот..." class="flex-1 bg-transparent border border-white/10 rounded-l-lg px-4 py-2.5 text-sm outline-none transition-colors">
+      <button id="searchBtn" class="bg-transparent hover:brightness-110 px-5 text-sm font-semibold text-[#1a1a1a] transition rounded-r-lg">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="612.08px" height="612.08px" viewBox="0 0 612.08 612.08" style="enable-background:new 0 0 612.08 612.08;" xml:space="preserve">
+<g>
+	<path d="M237.927,0C106.555,0,0.035,106.52,0.035,237.893c0,131.373,106.52,237.893,237.893,237.893   c50.518,0,97.368-15.757,135.879-42.597l0.028-0.028l176.432,176.433c3.274,3.274,8.48,3.358,11.839,0l47.551-47.551   c3.274-3.274,3.106-8.703-0.028-11.838L433.223,373.8c26.84-38.539,42.597-85.39,42.597-135.907C475.82,106.52,369.3,0,237.927,0z    M237.927,419.811c-100.475,0-181.918-81.443-181.918-181.918S137.453,55.975,237.927,55.975s181.918,81.443,181.918,181.918   S338.402,419.811,237.927,419.811z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+      </button>
+    </div>
+  </div>
+
+
+<div class="flex gap-3 mt-6 right-16">
+  <img src="/img/mountainous-5942962_640.jpg" alt="" class="w-[400px] h-[200px] bg-contain rounded-lg">
+  <img src="/img/mountains-lake_1398-1150.avif" alt="" class="w-[400px] h-[200px] bg-contain rounded-lg">
+</div>
+</div>
     <div id="statusMsg" class="text-[#9a968c] text-sm text-center py-6 hidden">Загрузка...</div>
     <div id="resultsGrid" class="flex gap-3 items-start"></div>
 
@@ -40,6 +219,8 @@
     </div>
   </div>
 
-<script src="/apikey.js"></script>
+  <!-- 2. Подключаем ваш файл с ключом API (убедитесь, что он лежит в той же папке или укажите правильный путь) -->
+  <script src="./apikey.js"></script>
+</body>
 </body>
 </html>
