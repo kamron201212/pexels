@@ -160,7 +160,7 @@ function createPhotoCard(photo) {
     <div class="absolute inset-0 flex flex-col justify-between items-stretch p-2 z-30 pointer-events-none">
 
       <!-- Верхний блок: кнопка с выпадающим меню, появляется при наведении на карточку -->
-      <div class="dropdown-wrapper relative self-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-auto">
+      <div class="dropdown-wrapper relative self-end opacity-0 group-hover:opacity-100 transition-opacity truncate translate-x-4 group-hover:translate-x-0 transition-transform duration-300 ease-out pointer-events-auto">
         <button type="button" class="dropdown-toggle-btn inline-flex items-center justify-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
           Dropdown button
           <svg class="dropdown-arrow transition-transform duration-300 ease-in-out w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
