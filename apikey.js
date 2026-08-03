@@ -140,7 +140,7 @@ function createPhotoCard(photo) {
 
   photoCard.innerHTML = `
     <img src="${photo.src.medium}" alt="${photo.alt || 'Фото'}" class="w-full h-auto rounded-lg z-10 block" style="aspect-ratio: ${photo.width} / ${photo.height};">
-    <div class="flex-col justify-between items-center absolute inset-0  group-hover/dropdown:opacity-100 transition-opacity duration-300 ease-out">
+    <div class="flex-col justify-between items-center absolute inset-0  hover:opacity-100 transition-opacity duration-300 ease-out">
     <div class="absolute group/dropdown truncate -translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-130 ease-in-out inset-0 bg-black/2 opacity-0 group-hover:opacity-100 transition-opacity  ease-in-out  items-center">   
       <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="inline-flex items-center justify-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button">
         Dropdown button 
