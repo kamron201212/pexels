@@ -134,20 +134,39 @@ async function downloadPhoto(url, filename) {
   }
 }
 
+// Закрывает все открытые дропдауны на странице (кроме переданного, если нужно оставить его открытым)
+function closeAllDropdowns(exceptMenu = null) {
+  document.querySelectorAll('.dropdown-menu').forEach((menu) => {
+    if (menu !== exceptMenu) {
+      menu.classList.add('hidden');
+      const card = menu.closest('.photo-card');
+      const arrow = card?.querySelector('.dropdown-arrow');
+      arrow?.classList.remove('rotate-180');
+    }
+  });
+}
+
+// Один делегированный обработчик на документ — закрывает дропдаун при клике вне его
+document.addEventListener('click', () => {
+  closeAllDropdowns();
+});
+
 function createPhotoCard(photo) {
   const photoCard = document.createElement('div');
   photoCard.className = 'photo-card group relative cursor-pointer overflow-hidden rounded-lg';
 
   photoCard.innerHTML = `
     <img src="${photo.src.medium}" alt="${photo.alt || 'Фото'}" class="w-full h-auto rounded-lg z-10 block" style="aspect-ratio: ${photo.width} / ${photo.height};">
-    <div class="flex-col justify-between items-center absolute inset-0  hover:opacity-100 transition-opacity duration-300 ease-out">
-    <div class="absolute group/dropdown truncate -translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-130 ease-in-out inset-0 bg-black/2 opacity-0 group-hover:opacity-100 transition-opacity  ease-in-out  items-center">   
-      <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="inline-flex items-center justify-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button">
-        Dropdown button 
-        <svg class="group-hover/dropdown:rotate-180 transition-transform duration-300 ease-in-out w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
-      </button>
-      <div id="dropdown" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44">
-          <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDefaultButton">
+    <div class="absolute inset-0 flex flex-col justify-between items-stretch p-2 z-30 pointer-events-none">
+
+      <!-- Верхний блок: кнопка с выпадающим меню, появляется при наведении на карточку -->
+      <div class="dropdown-wrapper relative self-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-auto">
+        <button type="button" class="dropdown-toggle-btn inline-flex items-center justify-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+          Dropdown button
+          <svg class="dropdown-arrow transition-transform duration-300 ease-in-out w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
+        </button>
+        <div class="dropdown-menu hidden absolute right-0 mt-2 z-40 bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44">
+          <ul class="p-2 text-sm text-body font-medium">
             <li>
               <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Dashboard</a>
             </li>
@@ -161,29 +180,54 @@ function createPhotoCard(photo) {
               <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sign out</a>
             </li>
           </ul>
+        </div>
       </div>
-    </div>
-    <div class="absolute bottom-0 left-0 right-0 backdrop-blur-sm  text-white text-lg p-2 rounded-b-lg z-20 flex justify-between items-center opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300 delay-150 ease-out">
-      <span class="truncate -translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-130 ease-in-out">
-        ${photo.photographer}
-      </span>
-      <div class="backdrop-blur-[4px] flex justify-center items-center rounded-full h-auto shrink-0 truncate translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-150 ease-in-out group-hover:backdrop-blur-lg">
-        <button type="button" class="download-btn border flex text-center items-center justify-center rounded-full w-[90px] h-32px] cursor-pointer text-white">Скачать</button>
+
+      <!-- Нижняя панель: автор + кнопка скачивания -->
+      <div class="info-panel backdrop-blur-sm text-white text-lg p-2 rounded-b-lg flex justify-between items-center opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300 delay-150 ease-out">
+        <span class="truncate -translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-130 ease-in-out">
+          ${photo.photographer}
+        </span>
+        <div class="backdrop-blur-[4px] flex justify-center items-center rounded-full h-auto shrink-0 truncate translate-x-4 group-hover:translate-x-0 transition-transform duration-300 delay-150 ease-in-out group-hover:backdrop-blur-lg">
+          <button type="button" class="download-btn border flex text-center items-center justify-center rounded-full w-[90px] h-8 cursor-pointer text-white">Скачать</button>
+        </div>
       </div>
-    </div>
+
     </div>
   `;
 
+  // Открытие/закрытие карточки — лайтбокс
   photoCard.addEventListener('click', () => {
     lightboxImg.src = photo.src.large;
     lightboxAuthor.textContent = `Автор: ${photo.photographer}`;
     lightbox.classList.remove('hidden');
   });
 
+  // Скачивание фото
   const downloadBtn = photoCard.querySelector('.download-btn');
   downloadBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     downloadPhoto(photo.src.original, `pexels-${photo.id}.jpg`);
+  });
+
+  // Переключение дропдауна
+  const dropdownToggleBtn = photoCard.querySelector('.dropdown-toggle-btn');
+  const dropdownMenu = photoCard.querySelector('.dropdown-menu');
+  const dropdownArrow = photoCard.querySelector('.dropdown-arrow');
+
+  dropdownToggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // не открывать лайтбокс и не всплывать до document-обработчика
+    const isHidden = dropdownMenu.classList.contains('hidden');
+    closeAllDropdowns(); // закрыть все остальные открытые дропдауны
+    if (isHidden) {
+      dropdownMenu.classList.remove('hidden');
+      dropdownArrow.classList.add('rotate-180');
+    }
+  });
+
+  // Клик внутри самого меню не должен закрывать его раньше времени
+  dropdownMenu.addEventListener('click', (e) => {
+    e.stopPropagation();
   });
 
   return photoCard;
