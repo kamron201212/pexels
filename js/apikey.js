@@ -1,39 +1,15 @@
 const apiKey = 'cfjpBhd59Dr3k0uwcGDCMHzt9Dd4ooKWox68hySAhBxfCIrkmO7tD4hV'; // Замените на ваш реальный API-ключ Pexels
 
-const searchInput = document.getElementById('searchInput');
-const searchBtn = document.getElementById('searchBtn');
 const statusMsg = document.getElementById('statusMsg');
 const resultsGrid = document.getElementById('resultsGrid');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
-const dropdownHoverbtn = document.getElementById('dropdownHoverButton');
-const dropdownhoverMenu = document.getElementById('dropdownHover');
-const dropdownhoverArrow = document.getElementById('dropdownhoverArrow'); 
-const dropdownB = document.getElementById('dropdownB');
-const dropdownM = document.getElementById('dropdownM');
-const dropdownA = document.getElementById('dropdownA');
-const colocolB = document.getElementById('colocolB');
-const colocolM = document.getElementById('colocolM');
-const colocolA = document.getElementById('colocolA');
-const logoB = document.getElementById('logoB');
-const logoM = document.getElementById('logoM');
-const changeB = document.getElementById('changeB');
-const changeM = document.getElementById('changeM');
-const changeA = document.getElementById('changeA');
-const headersearch = document.getElementById('headerSearch');
-const headerSearchInput = document.getElementById('headerSearchInput');
-const headerSearchBtn = document.getElementById('headerSearchBtn');
 
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-const lightboxAuthor = document.getElementById('lightboxAuthor');
-const closeLightbox = document.getElementById('closeLightbox');
 
 let currentQuery = null;
 let currentPage = 1;
 let isLoading = false;
 let hasMore = true;
 
-let allLoadedPhotos = [];
 let columnEls = [];
 let currentColumnCount = 0;
 
@@ -79,58 +55,7 @@ function getShortestColumn() {
   );
 }
 
-async function loadphotos(reset) {
-  if (isLoading) return;
-  if (!reset && !hasMore) return;
-  isLoading = true;
 
-  if (reset) {
-    currentPage = 1;
-    hasMore = true;
-    allLoadedPhotos = [];
-    setupColumns(); // пересоздаём пустые колонки под новый поиск
-  } else {
-    currentPage++;
-  }
-
-  statusMsg.innerHTML = skeletonHTML;
-  statusMsg.classList.remove('hidden');
-  loadMoreBtn.disabled = true;
-
-  try {
-    const url = currentQuery ? `https://api.pexels.com/v1/search?query=${encodeURIComponent(currentQuery)}&per_page=12&page=${currentPage}`: `https://api.pexels.com/v1/curated?per_page=12&page=${currentPage}`;
-
-    const response = await fetch(url, {
-      headers: {
-        Authorization: apiKey
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error(`Ошибка HTTP: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    if (data.photos.length === 0) {
-      statusMsg.textContent = reset ? 'Ничего не найдено.' : 'Больше фото нет.';
-      loadMoreBtn.classList.add('hidden');
-      hasMore = false;
-      return;
-    }
-
-    statusMsg.classList.add('hidden');
-    loadMoreBtn.classList.remove('hidden');
-    renderPhotos(data.photos);
-
-  } catch (error) {
-    console.error('Ошибка при загрузке фото:', error);
-    statusMsg.textContent = 'Произошла ошибка при загрузке фото.';
-  } finally {
-    isLoading = false;
-    loadMoreBtn.disabled = false;
-  }
-}
 
 async function downloadPhoto(url, filename) {
   try {
@@ -247,181 +172,11 @@ dropdownMenu.addEventListener('mouseout', (e) => {
 });
   return photoCard;
 }
-// Убрать блок с dropdownHoverbtn / dropdownhoverMenu из createPhotoCard()
-// и вынести его на верхний уровень файла, например после объявления lightbox-обработчиков:
 
-dropdownHoverbtn.addEventListener('mouseover', () => {
-  dropdownhoverMenu.classList.remove('hidden');
-  dropdownhoverMenu.classList.add('opacity-100', 'visible', 'translate-y-0');
-  dropdownhoverArrow.classList.add('rotate-180');
-});
-
-dropdownHoverbtn.addEventListener('mouseout', () => {
-  dropdownhoverMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
-  dropdownhoverArrow.classList.remove('rotate-180');
-  dropdownhoverMenu.classList.add('hidden');
-});
-
-dropdownhoverMenu.addEventListener('mouseover', () => {
-  dropdownhoverMenu.classList.remove('hidden');
-  dropdownhoverMenu.classList.add('opacity-100', 'visible', 'translate-y-0');
-});
-
-dropdownhoverMenu.addEventListener('mouseout', () => {
-  dropdownhoverMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
-  dropdownhoverMenu.classList.add('hidden');
-});
-dropdownB.addEventListener('mouseover', () => {
-  dropdownM.classList.remove('hidden');
-  dropdownM.classList.add('opacity-100', 'visible', 'translate-y-0');
-});
-
-dropdownB.addEventListener('mouseout', () => {
-  dropdownM.classList.remove('opacity-100', 'visible', 'translate-y-0');
-  dropdownM.classList.add('hidden');
-});
-
-dropdownM.addEventListener('mouseover', () => {
-  dropdownM.classList.remove('hidden');
-  dropdownM.classList.add('opacity-100', 'visible', 'translate-y-0');
-});
-
-dropdownM.addEventListener('mouseout', () => {
-  dropdownM.classList.remove('opacity-100', 'visible', 'translate-y-0');
-  dropdownM.classList.add('hidden');
-});
-colocolB.addEventListener('mouseover', () => {
-  colocolM.classList.remove('hidden');
-  colocolM.classList.add('opacity-100', 'visible', 'translate-y-0');
-});
-
-colocolB.addEventListener('mouseout', () => {
-  colocolM.classList.remove('opacity-100', 'visible', 'translate-y-0');
-  colocolM.classList.add('hidden');
-});
-
-colocolM.addEventListener('mouseover', () => {
-  colocolM.classList.remove('hidden');
-  colocolM.classList.add('opacity-100', 'visible', 'translate-y-0');
-});
-
-colocolM.addEventListener('mouseout', () => {
-  colocolM.classList.remove('opacity-100', 'visible', 'translate-y-0');
-  colocolM.classList.add('hidden');
-});
-logoB.addEventListener('mouseover', () => {
-  logoM.classList.remove('hidden');
-  logoM.classList.add('opacity-100', 'visible', 'translate-y-0');
-});
-
-logoB.addEventListener('mouseout', () => {
-  logoM.classList.remove('opacity-100', 'visible', 'translate-y-0');
-  logoM.classList.add('hidden');
-});
-
-logoM.addEventListener('mouseover', () => {
-  logoM.classList.remove('hidden');
-  logoM.classList.add('opacity-100', 'visible', 'translate-y-0');
-});
-
-logoM.addEventListener('mouseout', () => {
-  logoM.classList.remove('opacity-100', 'visible', 'translate-y-0');
-  logoM.classList.add('hidden');
-});
-
-changeB.addEventListener('mouseover', () => {
-  changeM.classList.remove('hidden');
-  changeM.classList.add('opacity-100', 'visible', 'translate-y-0');
-  changeA.classList.add('rotate-180');
-});
-
-changeB.addEventListener('mouseout', () => {
-  changeM.classList.remove('opacity-100', 'visible', 'translate-y-0');
-  changeA.classList.remove('rotate-180');
-  changeM.classList.add('hidden');
-});
-
-changeM.addEventListener('mouseover', () => {
-  changeM.classList.remove('hidden');
-  changeM.classList.add('opacity-100', 'visible', 'translate-y-0');
-});
-
-changeM.addEventListener('mouseout', () => {
-  changeM.classList.remove('opacity-100', 'visible', 'translate-y-0');
-  changeM0.classList.add('hidden');
-});
-
-function renderPhotos(photos) {
-  photos.forEach(photo => {
-    allLoadedPhotos.push(photo);
-    const photoCard = createPhotoCard(photo);
-    getShortestColumn().appendChild(photoCard);
-  });
-}
-
-closeLightbox.addEventListener('click', () => {
-  lightbox.classList.add('hidden');
-});
-
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) {
-    lightbox.classList.add('hidden');
-  }
-});
-
-searchBtn.addEventListener('click', () => {
-  currentQuery = searchInput.value.trim() || null;
-  loadphotos(true);
-});
-
-searchInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    currentQuery = searchInput.value.trim() || null;
-    loadphotos(true);
-  }
-});
-
-headerSearchBtn.addEventListener('click', () => {
-  searchInput.value = headerSearchInput.value;
-  currentQuery = headerSearchInput.value.trim() || null;
-  loadphotos(true);
-});
-
-headerSearchInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    headerSearchBtn.click();
-  }
-});
-
-searchInput.addEventListener('input', () => {
-  headerSearchInput.value = searchInput.value;
-});
 
 loadMoreBtn.addEventListener('click', () => {
   loadphotos(false);
 });
-
-function toggleHeaderSearch() {
-  const mainSearch = document.getElementById('mainSearch');
-  const headerHeight = document.querySelector('header').offsetHeight;
-  const showHeaderSearch = mainSearch.getBoundingClientRect().bottom <= headerHeight;
-
-  headersearch.classList.toggle('opacity-0', !showHeaderSearch);
-  headersearch.classList.toggle('-translate-y-2', !showHeaderSearch);
-  headersearch.classList.toggle('pointer-events-none', !showHeaderSearch);
-}
-
-window.addEventListener('scroll', () => {
-  toggleHeaderSearch();
-  const scrolledToBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 300;
-  if (scrolledToBottom) {
-    loadphotos(false);
-  }
-});
-
-window.addEventListener('resize', toggleHeaderSearch);
-toggleHeaderSearch();
-
 
 let resizeTimer;
 window.addEventListener('resize', () => {
